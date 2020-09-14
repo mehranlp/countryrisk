@@ -3,6 +3,7 @@ from geopy.geocoders import Nominatim
 import plotly.express as px
 import plotly.graph_objects as go
 data=pd.read_csv('data/dwb.csv')[0:50]
+
 names=data['Country/Territory'].tolist()
 
 
@@ -37,14 +38,20 @@ for i in data['rate']:
         
         
         
-data=pd.DataFrame({'Country':data['Country/Territory'],'GDP in Million $':data['GDP(US$million)'],'Risk':data['rate'],'Risk Category':riski,'Latitude':Latitude,'Longitude':Longitude})
+data=pd.DataFrame({'Country':data['Country/Territory'],'GDP in Million $':data['GDP(US$million)'],
+                   'Risk':data['rate'],'Risk Category':riski,'Latitude':Latitude,'Longitude':Longitude})
+
 data['Risk'] = data['Risk']*(-1)
 
-fig = px.choropleth(locations=data['Country'],hover_name=data['Risk Category'],locationmode="country names",
-                    color=data['Risk'],color_continuous_scale=px.colors.diverging.RdYlGn)
+fig = px.choropleth(locations=data['Country'],
+                    hover_name=data['Risk Category'],
+                    locationmode="country names",
+                    color=data['Risk'],
+                    color_continuous_scale=px.colors.diverging.RdYlGn)
 
 
-fig.update_layout(legend_title_text='uhi',legend=dict(
+fig.update_layout(legend_title_text='uhi',
+                  legend=dict(
     orientation="h",
     yanchor="bottom",
  
