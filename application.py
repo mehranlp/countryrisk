@@ -1,78 +1,34 @@
-import pandas as pd
-from geopy.geocoders import Nominatim
+import plotly
 import plotly.express as px
-import plotly.graph_objects as go
-data=pd.read_csv('data/dwb.csv')[0:50]
-
-names=data['Country/Territory'].tolist()
+import pandas as pd
 
 
-Latitude=[]
-Longitude=[]
-geolocator = Nominatim(user_agent="worldgeo")
-for i in enumerate(names):
-    location = geolocator.geocode(i)
-    me = location.latitude
-    ne = location.longitude
-    
-    Latitude.append(me)
-    Longitude.append(ne)
-    
 
+data=pd.read_csv('data/data.csv',index_col=0,na_values='-')
+#df = data.iloc[:,1:-1]
+#df1 = data.iloc[:,-1:].fillna(0)
 
-riski=[]
+data.fillna(method='ffill',inplace=True)
 
-for i in data['rate']:
-    if i >= 50:
-        riski.append('Extreme')
-    elif 40<=i<=50:
-        riski.append('Very High')
-    elif 30<=i<=40:
-        riski.append('High')
-    elif 20<=i<=30:
-        riski.append('Medium')
-    elif 10<=i<=20:
-        riski.append('Low')
-    elif 0<=i<=10:
-        riski.append('Very Low')
-        
-        
-        
-data=pd.DataFrame({'Country':data['Country/Territory'],'GDP in Million $':data['GDP(US$million)'],
-                   'Risk':data['rate'],'Risk Category':riski,'Latitude':Latitude,'Longitude':Longitude})
+fig = px.choropleth(
+            data_frame=data,
+            locations='Country/Territory',
+            locationmode='country names',
+            color='Default Risk',
+            title="COUNTRY RISK ASSESSMENT",
+            hover_data=['GDP(US$million)', 'Unemployment',
+            'Real GDP(% Growth)', 'Interest Rate(%)'],
+             color_discrete_map={
+                "Extreme": "maroon",
+                "Very High": "orangered",
+                "High": "darkorange",
+                "Fairly High": "orange",
+                "Reasonable": "yellow",
+                "Satisfactory": "yellowgreen",
+                "Low": "green"},
+            
+            )
 
-data['Risk'] = data['Risk']*(-1)
-
-fig = px.choropleth(locations=data['Country'],
-                    hover_name=data['Risk Category'],
-                    locationmode="country names",
-                    color=data['Risk'],
-                    color_continuous_scale=px.colors.diverging.RdYlGn)
-
-
-fig.update_layout(legend_title_text='uhi',
-                  legend=dict(
-    orientation="h",
-    yanchor="bottom",
- 
-    y=0.99,
-    xanchor="left",
-  
-    x=1),
-    title_text='Risk of Defualt for Top 50 Economies of the World 2020',
-    geo=dict(
-        
-        showframe=False,
-        showcoastlines=False,
-        
-        projection_type='equirectangular'
-    )
-)
-
-fig.update_geos(
-    visible=False, resolution=50,
-    showcountries=True, countrycolor="RebeccaPurple"
-)
-
+fig.update_layout(legend_title="Default Risk")
 
 fig.show()
