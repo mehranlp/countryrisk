@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run gbminteractivemehran.py
+web: sh setup.sh && streamlit run countryrisk.py
