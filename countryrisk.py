@@ -7,12 +7,12 @@ import streamlit as st
 # ------------------------------------------------------------------------------
 
 """
-###The consideration of country-specific risk is very important for both corporate finance and also investment decisions. Many large firms have business interest all around the world and to assess the risk associated with these businesses or projects,
+The consideration of country-specific risk is very important for both corporate finance and also investment decisions. Many large firms have business interest all around the world and to assess the risk associated with these businesses or projects,
 the financialand political situation of the target country must be considered. In addition,the difference in this component might lead to speculation opportunities, as Macro Funds are monitoring these factors closely for short term speculation purposes. 
 There are numerous componentsof country risk. From macroeconomic factors to political and socio-cultural, these components can be quantified. However, among those 3 factors, the last two, political and socio-cultural are difficult to measure.
 In this project, I used the [KNN algorithm] (https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) to categorize the countries, based on their macro indicator to different categories.My data comes from FactSet and as you can see in the chart, just available for the top 30 economies in the world.
 There are rich database and APIs (certainly notfree!) like [this] (https://www.quandl.com/data/SGE-Trading-Economics), that canbe used in this model to dynamically update the outcome. In addition, the modelcan be trained with more data available, and also the political and social changes can be feed to the model with news APIs…
-All in all, the complete code of this model is available on my [GITHUB] (https://github.com/mehranlp/countryrisk) and you can use it as a reference.###
+All in all, the complete code of this model is available on my [GITHUB] (https://github.com/mehranlp/countryrisk) and you can use it as a reference.
 """
 # ##Define and train the model
 train_df=pd.read_excel('train.xlsx', skiprows=(0,1,2,3,4,5,7),skipfooter=3,index_col=0,na_values='-')
