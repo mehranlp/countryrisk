@@ -1,6 +1,5 @@
 pandas
 numpy
-plotly
 scikit-learn
-streamlit
-xlrd
+plotly
+openpyxl
