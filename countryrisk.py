@@ -17,7 +17,7 @@ All in all, the complete code of this model is available on my [GITHUB] (https:/
 # ##Define and train the model
 train_df=pd.read_excel('train.xlsx', skiprows=(0,1,2,3,4,5,7),skipfooter=3,index_col=0,na_values='-')
 train_df=train_df.drop(labels=['World Total','Developed Countries','Emerging Countries','United Arab Emirates'],axis=0)
-train_df=train_df.dropna(1,how='all').replace(np.nan, 0)
+train_df = train_df.dropna(axis=1, how='all').replace(np.nan, 0)
 train_df['Risk_Category']=['Low','Low','Low','Low','Low','Low','Low','Low','Low','Satisfactory','Satisfactory','Low','Reasonable'
                             ,'Low','Very_Low','Very_Low','Low','Very_Low','Low','Very_Low','Low','Low','Low','Very_Low','Satisfactory'
                             ,'Low','Fairly_High','Satisfactory','Fairly_High','Reasonable','Satisfactory','Fairly_High','Fairly_High',
