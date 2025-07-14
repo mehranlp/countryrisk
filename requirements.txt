@@ -1,6 +1,6 @@
 pandas
 numpy
 plotly
-scikit-learn==0.23.2
+scikit-learn
 streamlit
-xlrd==1.2.0
+xlrd
