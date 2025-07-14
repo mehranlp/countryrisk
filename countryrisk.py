@@ -50,7 +50,7 @@ def country_risk(option_selected):
     dff = option_selected+'.xlsx'
     data=pd.read_excel(dff, skiprows=(0,1,2,3,4,5,7),skipfooter=3,index_col=0,na_values='-')
     data=data.drop(labels=['World Total','Developed Countries','Emerging Countries','United Arab Emirates'],axis=0)
-    data=data.dropna(1,how='all').replace(np.nan, 0)
+    data = data.dropna(axis=1, how='all').replace(np.nan, 0)
     knn1=KNN_model.predict(data)
     data['Risk_Category']=knn1
 
